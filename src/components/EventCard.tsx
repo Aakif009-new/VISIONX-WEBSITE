@@ -1,9 +1,9 @@
 "use client";
 
 import { Calendar, Clock, MapPin } from "lucide-react";
+import Link from "next/link";
 import GlassCard from "./GlassCard";
 import ScrollReveal from "./ScrollReveal";
-import CTAButton from "./CTAButton";
 import type { Event } from "@/data/events";
 
 interface Props {
@@ -56,10 +56,13 @@ export default function EventCard({ event, index }: Props) {
           </div>
         </div>
 
-        {!event.isPast && event.registrationLink && (
-          <CTAButton href={event.registrationLink} variant="primary" className="w-full">
+        {!event.isPast && (
+          <Link
+            href="/workshops"
+            className="w-full text-center px-5 py-2.5 rounded-full text-sm font-medium bg-[#00A3FF] text-white hover:shadow-[0_0_25px_rgba(0,163,255,0.4)] transition-all duration-300 hover:scale-[1.02]"
+          >
             Register Now
-          </CTAButton>
+          </Link>
         )}
       </GlassCard>
     </ScrollReveal>

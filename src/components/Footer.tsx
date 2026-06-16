@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
@@ -64,10 +65,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block mb-4">
-              <span className="font-orbitron text-xl font-black tracking-[0.15em]">
-                <span className="text-[#00A3FF]">VISION</span>
-                <span className="text-white font-light">X</span>
-              </span>
+              <Image
+                src="/images/logo.jpeg"
+                alt="VisionX"
+                width={120}
+                height={36}
+                className="object-contain"
+              />
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed mb-4">
               See Beyond. Build the Future.

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Users } from "lucide-react";
 import GlassCard from "./GlassCard";
 import ScrollReveal from "./ScrollReveal";
@@ -41,14 +42,26 @@ export default function TeamCard({ member, index }: Props) {
           member.council ? "p-8" : "p-6"
         )}
       >
-        <div
-          className={cn(
-            "rounded-full bg-gradient-to-br from-[#00A3FF]/20 to-[#3BB8FF]/10 border-2 border-[#00A3FF]/20 flex items-center justify-center text-white font-bold mb-4",
-            member.council ? "w-24 h-24 text-2xl" : "w-20 h-20 text-xl"
-          )}
-        >
-          {initials}
-        </div>
+        {member.image ? (
+          <div className={cn("relative mb-4", member.council ? "w-24 h-24" : "w-20 h-20")}>
+            <Image
+              src={member.image}
+              alt={member.name}
+              width={96}
+              height={96}
+              className="rounded-full object-cover object-top w-full h-full border-2 border-[#00A3FF]/20"
+            />
+          </div>
+        ) : (
+          <div
+            className={cn(
+              "rounded-full bg-gradient-to-br from-[#00A3FF]/20 to-[#3BB8FF]/10 border-2 border-[#00A3FF]/20 flex items-center justify-center text-white font-bold mb-4",
+              member.council ? "w-24 h-24 text-2xl" : "w-20 h-20 text-xl"
+            )}
+          >
+            {initials}
+          </div>
+        )}
         <h3 className="text-white font-semibold text-lg mb-1">{member.name}</h3>
         <p className="text-[#00A3FF] text-sm font-medium mb-3">{member.role}</p>
         {member.description && (
