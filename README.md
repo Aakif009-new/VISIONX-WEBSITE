@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# VisionX — Official Website
+
+**See Beyond. Build the Future.**
+
+VisionX is a student-led innovation and startup ecosystem platform built with Next.js. The website serves as the digital presence for the organization, showcasing its mission, team, services, events, workshops, and more — all wrapped in a premium dark-themed, glassmorphism-driven UI.
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Framework | [Next.js 16](https://nextjs.org) (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS v4 |
+| Animations | Framer Motion |
+| Icons | Lucide React |
+| Fonts | Orbitron (logo), Inter (body), Space Grotesk (headings) |
+
+## Pages
+
+| Route | Page |
+|-------|------|
+| `/` | Home — Hero with particle background, feature cards, impact counters |
+| `/about` | About — Story, Mission, Vision, Core Values, Journey Timeline |
+| `/team` | Team — Founding Council & Team Leads with profile photos |
+| `/services` | Services — 5 service offerings with detailed breakdowns |
+| `/workshops` | Workshops — Workshop & Bootcamp listings with registration |
+| `/workshops/[id]` | Workshop Detail — Full description, capacity status, registration CTA |
+| `/workshops/[id]/register` | Registration Form — 8-field form with validation & confirmation |
+| `/workshops/admin` | Admin Dashboard — Workshop CRUD, participant search & management |
+| `/events` | Events — Upcoming & past events with filter toggle |
+| `/blog` | Blog — Articles with category filters |
+| `/apply` | Apply — Membership application form |
+| `/incubate` | Incubate — Startup incubation application form |
+| `/contact` | Contact — Social links & contact form |
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the site.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+All pages are statically generated for optimal performance.
 
-To learn more about Next.js, take a look at the following resources:
+## Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+src/
+├── app/           # Next.js App Router pages
+├── components/    # Reusable UI components
+├── data/          # Static data files (team, events, workshops, etc.)
+└── lib/           # Utility functions
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Design System
 
-## Deploy on Vercel
+- **Background:** `#050816` (deep navy/black)
+- **Primary accent:** `#00A3FF` (neon blue)
+- **Secondary accent:** `#3BB8FF` (electric blue)
+- **UI pattern:** Glassmorphism with backdrop blur, neon glow effects, gradient borders
+- **Responsive:** Fully responsive across mobile, tablet, and desktop
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The site is fully static and can be deployed to any static hosting platform (Vercel, Netlify, GitHub Pages, etc.).
