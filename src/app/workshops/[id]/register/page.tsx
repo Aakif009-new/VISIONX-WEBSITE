@@ -84,9 +84,39 @@ export default function RegisterPage() {
     if (errors[field]) setErrors((prev) => ({ ...prev, [field]: "" }));
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
+    setSubmitting(true);
+
+    let apiSuccess = false;
+    try {
+      const res = await fetch("/api/workshop/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          full_name: formData.fullName,
+          email: formData.email,
+          phone: formData.mobile,
+          college_name: formData.college,
+          department: formData.department,
+          year_of_study: formData.year,
+          workshop_id: workshop.id,
+          additional_notes: formData.notes || null,
+        }),
+      });
+      apiSuccess = res.ok;
+    } catch {}
+
+    if (!apiSuccess) {
+      const messageBody = `Full Name: ${formData.fullName}\nEmail: ${formData.email}\nMobile: ${formData.mobile}\nCollege: ${formData.college}\nDepartment: ${formData.department}\nYear: ${formData.year}\nWorkshop: ${workshop.title}\nNotes: ${formData.notes || "N/A"}`;
+      const mailtoLink = `mailto:visionx.official.org@gmail.com?subject=${encodeURIComponent("Workshop Registration: " + workshop.title)}&body=${encodeURIComponent(messageBody)}`;
+      window.open(mailtoLink, "_blank");
+    }
+
+    setSubmitting(false);
     setSubmitted(true);
   };
 
@@ -298,10 +328,15 @@ export default function RegisterPage() {
 
               <button
                 type="submit"
-                className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-full font-medium bg-[#00A3FF] text-white hover:shadow-[0_0_25px_rgba(0,163,255,0.4)] transition-all duration-300 hover:scale-[1.02]"
+                disabled={submitting}
+                className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-full font-medium bg-[#00A3FF] text-white hover:shadow-[0_0_25px_rgba(0,163,255,0.4)] transition-all duration-300 hover:scale-[1.02] disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                Register Now
-                <Send size={16} />
+                {submitting ? "Submitting..." : (
+                  <>
+                    Register Now
+                    <Send size={16} />
+                  </>
+                )}
               </button>
             </form>
           </GlassCard>

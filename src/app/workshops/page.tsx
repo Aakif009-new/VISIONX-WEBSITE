@@ -1,12 +1,41 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
 import WorkshopCard from "@/components/WorkshopCard";
-import { workshops } from "@/data/workshops";
+import { workshops as staticWorkshops, type Workshop } from "@/data/workshops";
+
+function mapApiWorkshop(w: any): Workshop {
+  return {
+    id: w.id,
+    title: w.title,
+    date: w.event_date || "",
+    time: w.event_time || "",
+    location: w.venue || "",
+    description: w.description || "",
+    fullDescription: w.description || "",
+    banner: w.banner_image || undefined,
+    capacity: w.max_seats || 0,
+    registeredCount: w.registrations?.length || 0,
+    isRegistrationOpen: w.registration_open ?? true,
+    category: "Workshop",
+  };
+}
 
 export default function WorkshopsPage() {
+  const [workshops, setWorkshops] = useState<Workshop[]>(staticWorkshops);
   const [filter, setFilter] = useState<string>("All");
+
+  useEffect(() => {
+    fetch("/api/workshops")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && Array.isArray(data.data) && data.data.length > 0) {
+          setWorkshops(data.data.map(mapApiWorkshop));
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   const categories = ["All", ...Array.from(new Set(workshops.map((w) => w.category)))];
 

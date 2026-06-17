@@ -20,6 +20,8 @@ interface Props {
   fields: Field[];
   submitLabel: string;
   emailSubject: string;
+  apiEndpoint?: string;
+  getPayload?: (formData: Record<string, string>) => Record<string, unknown>;
 }
 
 export default function ApplicationForm({
@@ -28,6 +30,8 @@ export default function ApplicationForm({
   fields,
   submitLabel,
   emailSubject,
+  apiEndpoint,
+  getPayload,
 }: Props) {
   const [formData, setFormData] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
@@ -41,17 +45,33 @@ export default function ApplicationForm({
     e.preventDefault();
     setSubmitting(true);
 
-    const messageBody = fields
-      .map((f) => `${f.label}: ${formData[f.name] || ""}`)
-      .join("\n");
+    let apiSuccess = false;
 
-    const mailtoLink = `mailto:visionx@email.com?subject=${encodeURIComponent(
-      emailSubject
-    )}&body=${encodeURIComponent(messageBody)}`;
+    if (apiEndpoint) {
+      const payload = getPayload ? getPayload(formData) : formData;
+      try {
+        const res = await fetch(apiEndpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        apiSuccess = res.ok;
+      } catch {}
+    }
 
-    await new Promise((r) => setTimeout(r, 800));
+    if (!apiSuccess) {
+      const messageBody = fields
+        .map((f) => `${f.label}: ${formData[f.name] || ""}`)
+        .join("\n");
 
-    window.open(mailtoLink, "_blank");
+      const mailtoLink = `mailto:visionx.official.org@gmail.com?subject=${encodeURIComponent(
+        emailSubject
+      )}&body=${encodeURIComponent(messageBody)}`;
+
+      await new Promise((r) => setTimeout(r, 800));
+      window.open(mailtoLink, "_blank");
+    }
+
     setSubmitting(false);
     setSubmitted(true);
   };

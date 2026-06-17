@@ -5,6 +5,7 @@ export interface TeamMember {
   image?: string;
   isHiring?: boolean;
   council?: boolean;
+  objectPosition?: string;
 }
 
 export const foundingCouncil: TeamMember[] = [
@@ -22,13 +23,15 @@ export const foundingCouncil: TeamMember[] = [
     image: "/images/team/co-founder.jpeg",
     council: true,
   },
-  {
-    name: "Mohammed Mafaaz C",
-    role: "Chief Operating Officer",
-    description: "Leading operations, execution, and organizational growth.",
-    council: true,
-  },
 ];
+
+export const ceo: TeamMember = {
+  name: "Mohammed Mafaaz C",
+  role: "Chief Executive Officer",
+  description: "Leading operations, execution, and organizational growth.",
+  image: "/images/team/CEO.jpeg",
+  council: true,
+};
 
 export const teamLeads: TeamMember[] = [
   {
@@ -38,7 +41,7 @@ export const teamLeads: TeamMember[] = [
     image: "/images/team/tech-team-lead.jpg",
   },
   {
-    name: "Vinothini P",
+    name: "VK Mohammed Hussain",
     role: "Media Team Lead",
     description: "Managing branding, content creation, and digital presence.",
   },
@@ -47,23 +50,19 @@ export const teamLeads: TeamMember[] = [
     role: "Startup Team Lead",
     description: "Supporting founders and startup incubation programs.",
     image: "/images/team/startup-team-lead.png",
+    objectPosition: "object-top",
   },
   {
-    name: "Hiring In Progress",
-    role: "Team Lead Position",
-    description: "",
-    isHiring: true,
+    name: "RS Sajid Ahmed",
+    role: "Hackathons & Competitions Team Lead",
+    description: "Leading hackathon and competition initiatives for student engagement.",
+    image: "/images/team/hackathonscompetitions.jpeg",
   },
   {
-    name: "Hiring In Progress",
-    role: "Team Lead Position",
-    description: "",
-    isHiring: true,
-  },
-  {
-    name: "Hiring In Progress",
-    role: "Team Lead Position",
-    description: "",
-    isHiring: true,
+    name: "Mohammed Ehsaan",
+    role: "Assistant Team Lead - Hackathons & Competitions",
+    description: "Supporting hackathon operations and competition coordination.",
+    image: "/images/team/Assistantteamlead.jpeg",
+    objectPosition: "object-top",
   },
 ];

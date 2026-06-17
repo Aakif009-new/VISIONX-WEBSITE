@@ -49,7 +49,10 @@ export default function TeamCard({ member, index }: Props) {
               alt={member.name}
               width={96}
               height={96}
-              className="rounded-full object-cover object-top w-full h-full border-2 border-[#00A3FF]/20"
+              className={cn(
+  "rounded-full object-cover w-full h-full border-2 border-[#00A3FF]/20",
+  member.objectPosition || "object-center"
+)}
             />
           </div>
         ) : (
