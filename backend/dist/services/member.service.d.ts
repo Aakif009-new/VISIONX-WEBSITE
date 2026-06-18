@@ -3,11 +3,11 @@ export declare class MemberService {
     create(data: CreateMemberApplicationInput): Promise<{
         id: string;
         created_at: Date;
+        status: string;
         full_name: string;
         college_name: string;
         department: string;
         year_of_study: string;
-        status: string;
         role_interested: string;
         why_join: string;
         relevant_experience: string | null;
@@ -15,11 +15,11 @@ export declare class MemberService {
     getAll(): Promise<{
         id: string;
         created_at: Date;
+        status: string;
         full_name: string;
         college_name: string;
         department: string;
         year_of_study: string;
-        status: string;
         role_interested: string;
         why_join: string;
         relevant_experience: string | null;

@@ -20,16 +20,17 @@ export default function AdminWorkshopsPage() {
   const [form, setForm] = useState({
     title: "", description: "", venue: "", event_date: "", event_time: "",
     banner_image: "", registration_open: true, max_seats: "",
+    google_form_url: "", price: "",
   });
 
   const workshops = (data?.data || []) as Workshop[];
   const resetForm = () => {
-    setForm({ title: "", description: "", venue: "", event_date: "", event_time: "", banner_image: "", registration_open: true, max_seats: "" });
+    setForm({ title: "", description: "", venue: "", event_date: "", event_time: "", banner_image: "", registration_open: true, max_seats: "", google_form_url: "", price: "" });
     setEditing(null); setShowForm(false);
   };
 
   const openEdit = (w: Workshop) => {
-    setForm({ title: w.title, description: w.description, venue: w.venue, event_date: w.event_date, event_time: w.event_time, banner_image: w.banner_image || "", registration_open: w.registration_open, max_seats: w.max_seats?.toString() || "" });
+    setForm({ title: w.title, description: w.description, venue: w.venue, event_date: w.event_date, event_time: w.event_time, banner_image: w.banner_image || "", registration_open: w.registration_open, max_seats: w.max_seats?.toString() || "", google_form_url: (w as any).google_form_url || "", price: (w as any).price || "" });
     setEditing(w); setShowForm(true);
   };
 
@@ -39,6 +40,8 @@ export default function AdminWorkshopsPage() {
     if (payload.max_seats) payload.max_seats = parseInt(payload.max_seats);
     else payload.max_seats = null;
     if (!payload.banner_image) payload.banner_image = null;
+    if (!payload.google_form_url) payload.google_form_url = null;
+    if (!payload.price) payload.price = null;
     if (editing) await update.mutateAsync({ id: editing.id, data: payload });
     else await create.mutateAsync(payload);
     resetForm();
@@ -67,6 +70,8 @@ export default function AdminWorkshopsPage() {
             <input type="time" placeholder="Time" value={form.event_time} onChange={(e) => setForm({ ...form, event_time: e.target.value })} className="px-3 py-2 rounded-lg bg-[#050816] border border-[#00A3FF]/20 text-white text-sm" required />
             <input placeholder="Banner Image URL" value={form.banner_image} onChange={(e) => setForm({ ...form, banner_image: e.target.value })} className="px-3 py-2 rounded-lg bg-[#050816] border border-[#00A3FF]/20 text-white text-sm" />
             <input placeholder="Max Seats (optional)" type="number" value={form.max_seats} onChange={(e) => setForm({ ...form, max_seats: e.target.value })} className="px-3 py-2 rounded-lg bg-[#050816] border border-[#00A3FF]/20 text-white text-sm" />
+            <input placeholder="Google Form URL (optional)" type="url" value={form.google_form_url} onChange={(e) => setForm({ ...form, google_form_url: e.target.value })} className="px-3 py-2 rounded-lg bg-[#050816] border border-[#00A3FF]/20 text-white text-sm" />
+            <input placeholder="Price (optional, e.g. Free, ₹99)" value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} className="px-3 py-2 rounded-lg bg-[#050816] border border-[#00A3FF]/20 text-white text-sm" />
           </div>
           <textarea placeholder="Description" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} className="w-full px-3 py-2 rounded-lg bg-[#050816] border border-[#00A3FF]/20 text-white text-sm" rows={3} required />
           <div className="flex gap-2">

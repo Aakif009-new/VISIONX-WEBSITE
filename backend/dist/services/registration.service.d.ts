@@ -2,9 +2,9 @@ import type { CreateRegistrationInput } from "../validations";
 export declare class RegistrationService {
     create(data: CreateRegistrationInput): Promise<{
         id: string;
+        email: string;
         created_at: Date;
         full_name: string;
-        email: string;
         phone: string;
         college_name: string;
         department: string;
@@ -14,9 +14,9 @@ export declare class RegistrationService {
     }>;
     getByWorkshop(workshopId: string): Promise<{
         id: string;
+        email: string;
         created_at: Date;
         full_name: string;
-        email: string;
         phone: string;
         college_name: string;
         department: string;

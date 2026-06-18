@@ -4,7 +4,8 @@ import { logger } from "../utils/logger";
 type SheetType =
   | "workshop_registrations"
   | "incubation_applications"
-  | "member_applications";
+  | "member_applications"
+  | "contact_messages";
 
 export class GoogleSheetsService {
   private async appendRows(sheetName: SheetType, values: string[][]) {
@@ -81,6 +82,23 @@ export class GoogleSheetsService {
       data.created_at.toISOString(),
     ];
     await this.appendRows("incubation_applications", [row]);
+  }
+
+  async addContactMessage(data: {
+    id: string;
+    name: string;
+    email: string;
+    message: string;
+    created_at: Date;
+  }) {
+    const row = [
+      data.id,
+      data.name,
+      data.email,
+      data.message,
+      data.created_at.toISOString(),
+    ];
+    await this.appendRows("contact_messages", [row]);
   }
 
   async addMemberApplication(data: {

@@ -4,4 +4,9 @@ export { incubationService } from "./incubation.service";
 export { memberService } from "./member.service";
 export { contactService } from "./contact.service";
 export { googleSheetsService } from "./google-sheets.service";
+export { adminAuthService } from "./admin-auth.service";
+export { adminDashboardService } from "./admin-dashboard.service";
+export { adminTeamService } from "./admin-team.service";
+export { adminBlogService } from "./admin-blog.service";
+export { adminSettingsService } from "./admin-settings.service";
 //# sourceMappingURL=index.d.ts.map

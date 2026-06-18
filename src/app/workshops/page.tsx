@@ -19,6 +19,8 @@ function mapApiWorkshop(w: any): Workshop {
     registeredCount: w.registrations?.length || 0,
     isRegistrationOpen: w.registration_open ?? true,
     category: "Workshop",
+    googleFormUrl: w.google_form_url || undefined,
+    price: w.price || undefined,
   };
 }
 

@@ -9,8 +9,8 @@ export declare const createRegistrationSchema: z.ZodObject<{
     workshop_id: z.ZodString;
     additional_notes: z.ZodNullable<z.ZodOptional<z.ZodString>>;
 }, "strip", z.ZodTypeAny, {
-    full_name: string;
     email: string;
+    full_name: string;
     phone: string;
     college_name: string;
     department: string;
@@ -18,8 +18,8 @@ export declare const createRegistrationSchema: z.ZodObject<{
     workshop_id: string;
     additional_notes?: string | null | undefined;
 }, {
-    full_name: string;
     email: string;
+    full_name: string;
     phone: string;
     college_name: string;
     department: string;

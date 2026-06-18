@@ -9,11 +9,15 @@ const registration_routes_1 = __importDefault(require("./registration.routes"));
 const incubation_routes_1 = __importDefault(require("./incubation.routes"));
 const member_routes_1 = __importDefault(require("./member.routes"));
 const contact_routes_1 = __importDefault(require("./contact.routes"));
+const admin_routes_1 = __importDefault(require("./admin.routes"));
+const public_routes_1 = __importDefault(require("./public.routes"));
 const router = (0, express_1.Router)();
 router.use("/workshops", workshop_routes_1.default);
 router.use("/workshop", registration_routes_1.default);
 router.use("/incubation", incubation_routes_1.default);
 router.use("/join-visionx", member_routes_1.default);
 router.use("/contact", contact_routes_1.default);
+router.use("/admin", admin_routes_1.default);
+router.use("/", public_routes_1.default);
 exports.default = router;
 //# sourceMappingURL=index.js.map

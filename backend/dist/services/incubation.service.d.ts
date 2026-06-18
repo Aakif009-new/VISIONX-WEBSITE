@@ -3,9 +3,9 @@ export declare class IncubationService {
     create(data: CreateIncubationInput): Promise<{
         id: string;
         created_at: Date;
+        status: string;
         full_name: string;
         college_name: string;
-        status: string;
         startup_name: string;
         problem_statement: string;
         target_audience: string;
@@ -15,9 +15,9 @@ export declare class IncubationService {
     getAll(): Promise<{
         id: string;
         created_at: Date;
+        status: string;
         full_name: string;
         college_name: string;
-        status: string;
         startup_name: string;
         problem_statement: string;
         target_audience: string;

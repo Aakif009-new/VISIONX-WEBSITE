@@ -9,6 +9,8 @@ export const createWorkshopSchema = z.object({
   event_time: z.string().min(1, "Event time is required"),
   registration_open: z.boolean().optional().default(true),
   max_seats: z.number().int().positive("Max seats must be positive").optional().nullable(),
+  google_form_url: z.string().url("Invalid Google Form URL").optional().nullable(),
+  price: z.string().optional().nullable(),
 });
 
 export const updateWorkshopSchema = createWorkshopSchema.partial();

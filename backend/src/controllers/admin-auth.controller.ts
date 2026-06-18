@@ -7,7 +7,7 @@ export class AdminAuthController {
     try {
       const { email, password } = loginSchema.parse(req.body);
       const result = await adminAuthService.login(email, password);
-      res.json({ success: true, ...result });
+      res.json({ success: true, data: result });
     } catch (error) {
       next(error);
     }
