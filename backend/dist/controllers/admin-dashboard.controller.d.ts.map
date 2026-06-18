@@ -1,0 +1,1 @@
+{"version":3,"file":"admin-dashboard.controller.d.ts","sourceRoot":"","sources":["../../src/controllers/admin-dashboard.controller.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,OAAO,EAAE,QAAQ,EAAE,YAAY,EAAE,MAAM,SAAS,CAAC;AAG/D,qBAAa,wBAAwB;IAC7B,QAAQ,CAAC,IAAI,EAAE,OAAO,EAAE,GAAG,EAAE,QAAQ,EAAE,IAAI,EAAE,YAAY;CAShE;AAED,eAAO,MAAM,wBAAwB,0BAAiC,CAAC"}

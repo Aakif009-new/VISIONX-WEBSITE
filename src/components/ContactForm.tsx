@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { Send, CheckCircle, Mail, MessageCircle } from "lucide-react";
+import { Send, CheckCircle, Mail } from "lucide-react";
 import type { ReactNode } from "react";
 import GlassCard from "./GlassCard";
 import ScrollReveal from "./ScrollReveal";
@@ -14,14 +14,14 @@ const contactMethods: {
 }[] = [
   {
     label: "Official Email",
-    value: "visionx@email.com",
-    href: "mailto:visionx@email.com",
+    value: "visionx.official.org@gmail.com",
+    href: "mailto:visionx.official.org@gmail.com",
     render: () => <Mail className="w-5 h-5 text-[#00A3FF]" />,
   },
   {
     label: "Instagram",
-    value: "@visionx",
-    href: "https://instagram.com/visionx",
+    value: "@visionx.official_",
+    href: "https://www.instagram.com/visionx.official_?igsh=aDhhMTFwbzgxOHZ3&utm_source=ig_contact_invite",
     render: () => (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 text-[#00A3FF]">
         <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
@@ -32,8 +32,8 @@ const contactMethods: {
   },
   {
     label: "LinkedIn",
-    value: "VisionX",
-    href: "https://linkedin.com/company/visionx",
+    value: "VisionX Community",
+    href: "https://www.linkedin.com/company/visionxcommunity/",
     render: () => (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 text-[#00A3FF]">
         <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
@@ -42,12 +42,7 @@ const contactMethods: {
       </svg>
     ),
   },
-  {
-    label: "WhatsApp Community",
-    value: "Join our group",
-    href: "https://wa.me/visionx",
-    render: () => <MessageCircle className="w-5 h-5 text-[#00A3FF]" />,
-  },
+
 ];
 
 export default function ContactForm() {
@@ -59,13 +54,20 @@ export default function ContactForm() {
     e.preventDefault();
     setSubmitting(true);
 
-    const body = `Name: ${formData.name}\nEmail: ${formData.email}\nMessage: ${formData.message}`;
-    const mailtoLink = `mailto:visionx@email.com?subject=${encodeURIComponent(
-      "Contact Form Submission"
-    )}&body=${encodeURIComponent(body)}`;
+    try {
+      await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+    } catch {
+      const body = `Name: ${formData.name}\nEmail: ${formData.email}\nMessage: ${formData.message}`;
+      const mailtoLink = `mailto:visionx.official.org@gmail.com?subject=${encodeURIComponent(
+        "Contact Form Submission"
+      )}&body=${encodeURIComponent(body)}`;
+      window.open(mailtoLink, "_blank");
+    }
 
-    await new Promise((r) => setTimeout(r, 800));
-    window.open(mailtoLink, "_blank");
     setSubmitting(false);
     setSubmitted(true);
   };

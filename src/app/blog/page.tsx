@@ -1,12 +1,54 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
 import BlogCard from "@/components/BlogCard";
-import { blogPosts, blogCategories } from "@/data/blogPosts";
+import { blogPosts as staticBlogPosts, blogCategories as staticCategories, type BlogPost } from "@/data/blogPosts";
+
+function mapApiBlogPost(p: any): BlogPost {
+  const text = p.excerpt || p.content || "";
+  const wordsPerMin = 200;
+  const wordCount = text.split(/\s+/).length;
+  const readTime = Math.max(1, Math.ceil(wordCount / wordsPerMin));
+
+  return {
+    id: p.id,
+    title: p.title || "",
+    excerpt: p.excerpt || "",
+    category: p.category || "General",
+    author: p.author || "VisionX Team",
+    date: p.published_at
+      ? new Date(p.published_at).toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })
+      : "",
+    image: p.image || undefined,
+    readTime: `${readTime} min read`,
+    slug: p.slug,
+  };
+}
 
 export default function BlogPage() {
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>(staticBlogPosts);
+  const [blogCategories, setBlogCategories] = useState<string[]>(staticCategories);
   const [activeCategory, setActiveCategory] = useState("All");
+
+  useEffect(() => {
+    fetch("/api/blogs")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && Array.isArray(data.data) && data.data.length > 0) {
+          const posts: BlogPost[] = data.data.map(mapApiBlogPost);
+          setBlogPosts(posts);
+          const catSet = new Set(posts.map((p) => p.category));
+          const cats = ["All", ...Array.from(catSet)];
+          setBlogCategories(cats);
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   const filtered =
     activeCategory === "All"

@@ -11,6 +11,8 @@ export interface Workshop {
   registeredCount: number;
   isRegistrationOpen: boolean;
   category: string;
+  googleFormUrl?: string;
+  price?: string;
 }
 
 export interface Registration {

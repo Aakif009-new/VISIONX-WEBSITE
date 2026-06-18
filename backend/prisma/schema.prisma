@@ -1,0 +1,119 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model admin_users {
+  id         String   @id @default(uuid())
+  email      String   @unique
+  password   String
+  name       String
+  role       String   @default("content_admin")
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model blog_posts {
+  id           String    @id @default(uuid())
+  title        String
+  slug         String    @unique
+  excerpt      String?
+  content      String
+  category     String?
+  author       String
+  image        String?
+  status       String    @default("draft")
+  published_at DateTime?
+  created_at   DateTime  @default(now())
+  updated_at   DateTime  @updatedAt
+}
+
+model team_members {
+  id            String   @id @default(uuid())
+  name          String
+  role          String
+  department    String?
+  bio           String?
+  image_url     String?
+  linkedin_url  String?
+  display_order Int      @default(0)
+  council       Boolean  @default(false)
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+}
+
+model site_settings {
+  id         String   @id @default(uuid())
+  key        String   @unique
+  value      String
+  updated_at DateTime @updatedAt
+}
+
+model workshops {
+  id                 String                  @id @default(uuid())
+  title              String
+  description        String
+  banner_image       String?
+  venue              String
+  event_date         String
+  event_time         String
+  registration_open  Boolean                 @default(true)
+  max_seats          Int?
+  google_form_url    String?
+  price              String?
+  created_at         DateTime                @default(now())
+  updated_at         DateTime                @updatedAt
+  registrations      workshop_registrations[]
+}
+
+model workshop_registrations {
+  id               String   @id @default(uuid())
+  full_name        String
+  email            String
+  phone            String
+  college_name     String
+  department       String
+  year_of_study    String
+  workshop_id      String
+  additional_notes String?
+  created_at       DateTime @default(now())
+  workshop         workshops @relation(fields: [workshop_id], references: [id], onDelete: Cascade)
+}
+
+model incubation_applications {
+  id               String   @id @default(uuid())
+  full_name        String
+  college_name     String
+  startup_name     String
+  problem_statement String
+  target_audience  String
+  startup_stage    String
+  support_needed   String
+  status           String   @default("New")
+  created_at       DateTime @default(now())
+}
+
+model visionx_member_applications {
+  id                  String   @id @default(uuid())
+  full_name           String
+  college_name        String
+  department          String
+  year_of_study       String
+  role_interested     String
+  why_join            String
+  relevant_experience String?
+  status              String   @default("Pending")
+  created_at          DateTime @default(now())
+}
+
+model contact_messages {
+  id         String   @id @default(uuid())
+  name       String
+  email      String
+  message    String
+  created_at DateTime @default(now())
+}
