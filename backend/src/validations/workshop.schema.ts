@@ -11,6 +11,7 @@ export const createWorkshopSchema = z.object({
   max_seats: z.number().int().positive("Max seats must be positive").optional().nullable(),
   google_form_url: z.string().url("Invalid Google Form URL").optional().nullable(),
   price: z.string().optional().nullable(),
+  category: z.string().optional().default("Workshop"),
 });
 
 export const updateWorkshopSchema = createWorkshopSchema.partial();

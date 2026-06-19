@@ -65,6 +65,7 @@ model workshops {
   max_seats          Int?
   google_form_url    String?
   price              String?
+  category           String                  @default("Workshop")
   created_at         DateTime                @default(now())
   updated_at         DateTime                @updatedAt
   registrations      workshop_registrations[]
