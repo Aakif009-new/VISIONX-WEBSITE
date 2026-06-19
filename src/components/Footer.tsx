@@ -6,7 +6,7 @@ const quickLinks = [
   { href: "/about", label: "About Us" },
   { href: "/team", label: "Our Team" },
   { href: "/services", label: "Services" },
-  { href: "/events", label: "Events" },
+  { href: "/workshops", label: "Workshops" },
   { href: "/blog", label: "Blog" },
   { href: "/apply", label: "Join VisionX" },
   { href: "/incubate", label: "Apply for Incubation" },

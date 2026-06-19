@@ -42,7 +42,7 @@ export default function HeroSection() {
             <CTAButton href="/incubate" variant="outline">
               Apply for Incubation
             </CTAButton>
-            <CTAButton href="/events" variant="secondary">
+            <CTAButton href="/workshops" variant="secondary">
               Explore Events
             </CTAButton>
           </div>

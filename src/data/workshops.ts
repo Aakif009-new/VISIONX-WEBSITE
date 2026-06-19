@@ -11,6 +11,8 @@ export interface Workshop {
   registeredCount: number;
   isRegistrationOpen: boolean;
   category: string;
+  googleFormUrl?: string;
+  price?: string;
 }
 
 export interface Registration {
@@ -111,6 +113,8 @@ export const workshops: Workshop[] = [
     registeredCount: 8,
     isRegistrationOpen: true,
     category: "Workshop",
+    googleFormUrl: "https://forms.google.com/cloud-devops-registration",
+    price: "Free",
   },
 ];
 

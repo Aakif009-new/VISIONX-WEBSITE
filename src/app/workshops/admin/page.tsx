@@ -25,6 +25,8 @@ export default function AdminDashboardPage() {
     fullDescription: "",
     capacity: 30,
     category: "Workshop",
+    googleFormUrl: "",
+    price: "",
   });
 
   const filteredWorkshops = workshopList.filter(
@@ -43,7 +45,7 @@ export default function AdminDashboardPage() {
   );
 
   const resetForm = () => {
-    setForm({ title: "", date: "", time: "", location: "", description: "", fullDescription: "", capacity: 30, category: "Workshop" });
+    setForm({ title: "", date: "", time: "", location: "", description: "", fullDescription: "", capacity: 30, category: "Workshop", googleFormUrl: "", price: "" });
     setEditingId(null);
   };
 
@@ -51,6 +53,8 @@ export default function AdminDashboardPage() {
     const newWorkshop: Workshop = {
       id: `w${Date.now()}`,
       ...form,
+      googleFormUrl: form.googleFormUrl || undefined,
+      price: form.price || undefined,
       registeredCount: 0,
       isRegistrationOpen: true,
       banner: undefined,
@@ -70,6 +74,8 @@ export default function AdminDashboardPage() {
       fullDescription: workshop.fullDescription,
       capacity: workshop.capacity,
       category: workshop.category,
+      googleFormUrl: workshop.googleFormUrl || "",
+      price: workshop.price || "",
     });
     setEditingId(workshop.id);
   };
@@ -164,6 +170,10 @@ export default function AdminDashboardPage() {
                   </select>
                   <input type="number" placeholder="Capacity" value={form.capacity} onChange={(e) => setForm({ ...form, capacity: Number(e.target.value) })}
                     className="px-4 py-3 rounded-xl bg-white/5 border border-[#00A3FF]/10 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-[#00A3FF]/40 transition-all duration-300" />
+                  <input type="url" placeholder="Google Form URL (optional)" value={form.googleFormUrl} onChange={(e) => setForm({ ...form, googleFormUrl: e.target.value })}
+                    className="px-4 py-3 rounded-xl bg-white/5 border border-[#00A3FF]/10 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-[#00A3FF]/40 transition-all duration-300" />
+                  <input type="text" placeholder="Price (optional, e.g. Free, ₹99)" value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })}
+                    className="px-4 py-3 rounded-xl bg-white/5 border border-[#00A3FF]/10 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-[#00A3FF]/40 transition-all duration-300" />
                   <textarea placeholder="Short description" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })}
                     className="col-span-2 px-4 py-3 rounded-xl bg-white/5 border border-[#00A3FF]/10 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-[#00A3FF]/40 transition-all duration-300 resize-none" rows={2} />
                   <textarea placeholder="Full description" value={form.fullDescription} onChange={(e) => setForm({ ...form, fullDescription: e.target.value })}
@@ -201,6 +211,10 @@ export default function AdminDashboardPage() {
                     <option value="Bootcamp" className="bg-[#050816]">Bootcamp</option>
                   </select>
                   <input type="number" placeholder="Capacity" value={form.capacity} onChange={(e) => setForm({ ...form, capacity: Number(e.target.value) })}
+                    className="px-4 py-3 rounded-xl bg-white/5 border border-[#00A3FF]/10 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-[#00A3FF]/40 transition-all duration-300" />
+                  <input type="url" placeholder="Google Form URL (optional)" value={form.googleFormUrl} onChange={(e) => setForm({ ...form, googleFormUrl: e.target.value })}
+                    className="px-4 py-3 rounded-xl bg-white/5 border border-[#00A3FF]/10 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-[#00A3FF]/40 transition-all duration-300" />
+                  <input type="text" placeholder="Price (optional, e.g. Free, ₹99)" value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })}
                     className="px-4 py-3 rounded-xl bg-white/5 border border-[#00A3FF]/10 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-[#00A3FF]/40 transition-all duration-300" />
                   <textarea placeholder="Short description" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })}
                     className="col-span-2 px-4 py-3 rounded-xl bg-white/5 border border-[#00A3FF]/10 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-[#00A3FF]/40 transition-all duration-300 resize-none" rows={2} />
