@@ -73,6 +73,16 @@ export default function ApplyPage() {
             fields={fields}
             submitLabel="Apply Now"
             emailSubject="VisionX Membership Application"
+            apiEndpoint="/api/join-visionx/apply"
+            getPayload={(data) => ({
+              full_name: data.fullName,
+              college_name: data.college,
+              department: data.department,
+              year_of_study: data.year,
+              role_interested: data.role,
+              why_join: data.reason,
+              relevant_experience: data.experience || null,
+            })}
           />
         </div>
       </section>

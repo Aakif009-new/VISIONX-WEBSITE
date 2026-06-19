@@ -121,12 +121,23 @@ export default function WorkshopDetailPage() {
                   </div>
 
                   {workshop.isRegistrationOpen && !isFull && (
-                    <Link
-                      href={`/workshops/${workshop.id}/register`}
-                      className="block w-full text-center px-6 py-3 rounded-full font-medium bg-[#00A3FF] text-white hover:shadow-[0_0_25px_rgba(0,163,255,0.4)] transition-all duration-300 hover:scale-[1.02]"
-                    >
-                      Register Now
-                    </Link>
+                    workshop.googleFormUrl ? (
+                      <a
+                        href={workshop.googleFormUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block w-full text-center px-6 py-3 rounded-full font-medium bg-[#00A3FF] text-white hover:shadow-[0_0_25px_rgba(0,163,255,0.4)] transition-all duration-300 hover:scale-[1.02]"
+                      >
+                        Register via Google Form
+                      </a>
+                    ) : (
+                      <Link
+                        href={`/workshops/${workshop.id}/register`}
+                        className="block w-full text-center px-6 py-3 rounded-full font-medium bg-[#00A3FF] text-white hover:shadow-[0_0_25px_rgba(0,163,255,0.4)] transition-all duration-300 hover:scale-[1.02]"
+                      >
+                        Register Now
+                      </Link>
+                    )
                   )}
                 </GlassCard>
               </ScrollReveal>

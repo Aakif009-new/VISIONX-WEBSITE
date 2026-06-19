@@ -53,6 +53,16 @@ export default function IncubatePage() {
             fields={fields}
             submitLabel="Apply For Incubation"
             emailSubject="Startup Incubation Application"
+            apiEndpoint="/api/incubation/apply"
+            getPayload={(data) => ({
+              full_name: data.fullName,
+              college_name: data.college,
+              startup_name: data.startupName,
+              problem_statement: data.problem,
+              target_audience: data.audience,
+              startup_stage: data.stage,
+              support_needed: data.support,
+            })}
           />
         </div>
       </section>

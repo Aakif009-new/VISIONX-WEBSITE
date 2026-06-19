@@ -56,14 +56,14 @@ export default function Header() {
                 "px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 relative",
                 pathname === link.href
                   ? "text-[#00A3FF]"
-                  : "text-gray-400 hover:text-white hover:bg-white/5"
+                  : "text-gray-400 hover:text-white"
               )}
             >
-              {link.label}
+              <span className="relative z-10">{link.label}</span>
               {pathname === link.href && (
                 <motion.span
                   layoutId="nav-indicator"
-                  className="absolute bottom-0 left-4 right-4 h-0.5 bg-[#00A3FF] rounded-full"
+                  className="absolute inset-0 rounded-full bg-[#00A3FF]/10 border border-[#00A3FF]/20 shadow-[0_0_20px_rgba(0,163,255,0.15)]"
                 />
               )}
             </Link>

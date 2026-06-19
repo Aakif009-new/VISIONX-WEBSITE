@@ -14,7 +14,7 @@ const quickLinks = [
 
 const socialLinks: { href: string; label: string; render: () => ReactNode }[] = [
   {
-    href: "mailto:visionx@email.com",
+    href: "mailto:visionx.official.org@gmail.com",
     label: "Email",
     render: () => (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-[18px] h-[18px]">
@@ -24,7 +24,7 @@ const socialLinks: { href: string; label: string; render: () => ReactNode }[] = 
     ),
   },
   {
-    href: "https://instagram.com/visionx",
+    href: "https://www.instagram.com/visionx.official_?igsh=aDhhMTFwbzgxOHZ3&utm_source=ig_contact_invite",
     label: "Instagram",
     render: () => (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-[18px] h-[18px]">
@@ -35,7 +35,7 @@ const socialLinks: { href: string; label: string; render: () => ReactNode }[] = 
     ),
   },
   {
-    href: "https://linkedin.com/company/visionx",
+    href: "https://www.linkedin.com/company/visionxcommunity/",
     label: "LinkedIn",
     render: () => (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-[18px] h-[18px]">
@@ -45,15 +45,7 @@ const socialLinks: { href: string; label: string; render: () => ReactNode }[] = 
       </svg>
     ),
   },
-  {
-    href: "https://wa.me/visionx",
-    label: "WhatsApp",
-    render: () => (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-[18px] h-[18px]">
-        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
-      </svg>
-    ),
-  },
+
 ];
 
 export default function Footer() {
@@ -125,17 +117,17 @@ export default function Footer() {
             </h3>
             <div className="space-y-3">
               <a
-                href="mailto:visionx@email.com"
+                href="mailto:visionx.official.org@gmail.com"
                 className="flex items-center gap-3 text-gray-400 hover:text-[#00A3FF] text-sm transition-colors duration-200"
               >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-[14px] h-[14px] shrink-0">
                   <rect x="2" y="4" width="20" height="16" rx="2" />
                   <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
                 </svg>
-                visionx@email.com
+                visionx.official.org@gmail.com
               </a>
               <a
-                href="https://instagram.com/visionx"
+                href="https://www.instagram.com/visionx.official_?igsh=aDhhMTFwbzgxOHZ3&utm_source=ig_contact_invite"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 text-gray-400 hover:text-[#00A3FF] text-sm transition-colors duration-200"
@@ -145,10 +137,10 @@ export default function Footer() {
                   <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
                   <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
                 </svg>
-                @visionx
+                @visionx.official_
               </a>
               <a
-                href="https://linkedin.com/company/visionx"
+                href="https://www.linkedin.com/company/visionxcommunity/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 text-gray-400 hover:text-[#00A3FF] text-sm transition-colors duration-200"
@@ -158,7 +150,7 @@ export default function Footer() {
                   <rect x="2" y="9" width="4" height="12" />
                   <circle cx="4" cy="4" r="2" />
                 </svg>
-                VisionX
+                VisionX Community
               </a>
             </div>
           </div>

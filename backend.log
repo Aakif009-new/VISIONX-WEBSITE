@@ -1,0 +1,17 @@
+
+> visionx-backend@1.0.0 dev
+> ts-node-dev --respawn --transpile-only src/app.ts
+
+[INFO] 13:48:30 ts-node-dev ver. 2.0.0 (using ts-node ver. 10.9.2, typescript ver. 5.9.3)
+[2026-06-18T08:18:32.671Z] INFO: VisionX API server running on port 4000 
+[2026-06-18T08:18:58.349Z] ERROR: Expected property name or '}' in JSON at position 1 (line 1 column 2) SyntaxError: Expected property name or '}' in JSON at position 1 (line 1 column 2)
+    at JSON.parse (<anonymous>)
+    at parse (D:\VISIONX-WEBSITE\backend\node_modules\body-parser\lib\types\json.js:92:19)
+    at D:\VISIONX-WEBSITE\backend\node_modules\body-parser\lib\read.js:128:18
+    at AsyncResource.runInAsyncScope (node:async_hooks:227:14)
+    at invokeCallback (D:\VISIONX-WEBSITE\backend\node_modules\raw-body\index.js:238:16)
+    at done (D:\VISIONX-WEBSITE\backend\node_modules\raw-body\index.js:227:7)
+    at IncomingMessage.onEnd (D:\VISIONX-WEBSITE\backend\node_modules\raw-body\index.js:287:7)
+    at IncomingMessage.emit (node:events:509:28)
+    at endReadableNT (node:internal/streams/readable:1735:12)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)

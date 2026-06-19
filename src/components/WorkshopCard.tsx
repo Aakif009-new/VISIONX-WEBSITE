@@ -1,6 +1,6 @@
 "use client";
 
-import { Calendar, Clock, MapPin, Users } from "lucide-react";
+import { Calendar, Clock, MapPin, Users, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import GlassCard from "./GlassCard";
 import ScrollReveal from "./ScrollReveal";
@@ -31,18 +31,25 @@ export default function WorkshopCard({ workshop, index }: Props) {
         </div>
 
         <div className="flex items-center justify-between mb-3">
-          <span
-            className={cn(
-              "px-2 py-0.5 rounded-full text-[10px] font-medium uppercase tracking-wider",
-              isFull
-                ? "bg-red-500/20 text-red-400"
-                : workshop.isRegistrationOpen
-                  ? "bg-green-500/20 text-green-400"
-                  : "bg-gray-500/20 text-gray-400"
+          <div className="flex items-center gap-2">
+            <span
+              className={cn(
+                "px-2 py-0.5 rounded-full text-[10px] font-medium uppercase tracking-wider",
+                isFull
+                  ? "bg-red-500/20 text-red-400"
+                  : workshop.isRegistrationOpen
+                    ? "bg-green-500/20 text-green-400"
+                    : "bg-gray-500/20 text-gray-400"
+              )}
+            >
+              {isFull ? "Full" : workshop.isRegistrationOpen ? "Open" : "Closed"}
+            </span>
+            {workshop.price && (
+              <span className="px-2 py-0.5 rounded-full text-[10px] font-medium bg-[#00A3FF]/15 text-[#00A3FF]">
+                {workshop.price}
+              </span>
             )}
-          >
-            {isFull ? "Full" : workshop.isRegistrationOpen ? "Open" : "Closed"}
-          </span>
+          </div>
           <span className="flex items-center gap-1 text-gray-500 text-xs">
             <Users size={12} />
             {workshop.registeredCount}/{workshop.capacity}
@@ -79,12 +86,23 @@ export default function WorkshopCard({ workshop, index }: Props) {
             View Details
           </Link>
           {workshop.isRegistrationOpen && !isFull && (
-            <Link
-              href={`/workshops/${workshop.id}/register`}
-              className="flex-1 text-center px-4 py-2.5 rounded-full text-sm font-medium bg-[#00A3FF] text-white hover:shadow-[0_0_25px_rgba(0,163,255,0.4)] transition-all duration-300 hover:scale-[1.02]"
-            >
-              {spotsLeft <= 5 ? `Only ${spotsLeft} left!` : "Register"}
-            </Link>
+            workshop.googleFormUrl ? (
+              <a
+                href={workshop.googleFormUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-full text-sm font-medium bg-[#00A3FF] text-white hover:shadow-[0_0_25px_rgba(0,163,255,0.4)] transition-all duration-300 hover:scale-[1.02]"
+              >
+                Register <ExternalLink size={14} />
+              </a>
+            ) : (
+              <Link
+                href={`/workshops/${workshop.id}/register`}
+                className="flex-1 text-center px-4 py-2.5 rounded-full text-sm font-medium bg-[#00A3FF] text-white hover:shadow-[0_0_25px_rgba(0,163,255,0.4)] transition-all duration-300 hover:scale-[1.02]"
+              >
+                {spotsLeft <= 5 ? `Only ${spotsLeft} left!` : "Register"}
+              </Link>
+            )
           )}
         </div>
       </GlassCard>

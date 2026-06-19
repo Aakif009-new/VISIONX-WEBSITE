@@ -49,7 +49,7 @@ export default function BlogCard({ post, index }: Props) {
 
         <div className="flex items-center justify-between">
           <span className="text-gray-500 text-xs">By {post.author}</span>
-          <CTAButton href={`/blog/${post.id}`} variant="outline" className="text-xs px-4 py-1.5">
+          <CTAButton href={`/blog/${post.slug || post.id}`} variant="outline" className="text-xs px-4 py-1.5">
             Read More
           </CTAButton>
         </div>
