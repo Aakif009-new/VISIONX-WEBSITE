@@ -8,6 +8,7 @@ interface Workshop {
   id: string;
   title: string; description: string; venue: string; event_date: string; event_time: string;
   banner_image: string | null; registration_open: boolean; max_seats: number | null;
+  category: string;
 }
 
 export default function AdminWorkshopsPage() {
@@ -20,17 +21,17 @@ export default function AdminWorkshopsPage() {
   const [form, setForm] = useState({
     title: "", description: "", venue: "", event_date: "", event_time: "",
     banner_image: "", registration_open: true, max_seats: "",
-    google_form_url: "", price: "",
+    google_form_url: "", price: "", category: "Workshop",
   });
 
   const workshops = (data?.data || []) as Workshop[];
   const resetForm = () => {
-    setForm({ title: "", description: "", venue: "", event_date: "", event_time: "", banner_image: "", registration_open: true, max_seats: "", google_form_url: "", price: "" });
+    setForm({ title: "", description: "", venue: "", event_date: "", event_time: "", banner_image: "", registration_open: true, max_seats: "", google_form_url: "", price: "", category: "Workshop" });
     setEditing(null); setShowForm(false);
   };
 
   const openEdit = (w: Workshop) => {
-    setForm({ title: w.title, description: w.description, venue: w.venue, event_date: w.event_date, event_time: w.event_time, banner_image: w.banner_image || "", registration_open: w.registration_open, max_seats: w.max_seats?.toString() || "", google_form_url: (w as any).google_form_url || "", price: (w as any).price || "" });
+    setForm({ title: w.title, description: w.description, venue: w.venue, event_date: w.event_date, event_time: w.event_time, banner_image: w.banner_image || "", registration_open: w.registration_open, max_seats: w.max_seats?.toString() || "", google_form_url: (w as any).google_form_url || "", price: (w as any).price || "", category: w.category || "Workshop" });
     setEditing(w); setShowForm(true);
   };
 
@@ -42,6 +43,7 @@ export default function AdminWorkshopsPage() {
     if (!payload.banner_image) payload.banner_image = null;
     if (!payload.google_form_url) payload.google_form_url = null;
     if (!payload.price) payload.price = null;
+    if (!payload.category) payload.category = "Workshop";
     if (editing) await update.mutateAsync({ id: editing.id, data: payload });
     else await create.mutateAsync(payload);
     resetForm();
@@ -72,6 +74,11 @@ export default function AdminWorkshopsPage() {
             <input placeholder="Max Seats (optional)" type="number" value={form.max_seats} onChange={(e) => setForm({ ...form, max_seats: e.target.value })} className="px-3 py-2 rounded-lg bg-[#050816] border border-[#00A3FF]/20 text-white text-sm" />
             <input placeholder="Google Form URL (optional)" type="url" value={form.google_form_url} onChange={(e) => setForm({ ...form, google_form_url: e.target.value })} className="px-3 py-2 rounded-lg bg-[#050816] border border-[#00A3FF]/20 text-white text-sm" />
             <input placeholder="Price (optional, e.g. Free, ₹99)" value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} className="px-3 py-2 rounded-lg bg-[#050816] border border-[#00A3FF]/20 text-white text-sm" />
+            <select value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })}
+              className="px-3 py-2 rounded-lg bg-[#050816] border border-[#00A3FF]/20 text-white text-sm">
+              <option value="Workshop" className="bg-[#050816]">Workshop</option>
+              <option value="Bootcamp" className="bg-[#050816]">Bootcamp</option>
+            </select>
           </div>
           <textarea placeholder="Description" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} className="w-full px-3 py-2 rounded-lg bg-[#050816] border border-[#00A3FF]/20 text-white text-sm" rows={3} required />
           <div className="flex gap-2">
@@ -88,6 +95,7 @@ export default function AdminWorkshopsPage() {
               <thead>
                 <tr className="border-b border-[#00A3FF]/10 text-gray-400">
                   <th className="text-left p-3">Title</th>
+                  <th className="text-left p-3 hidden sm:table-cell">Category</th>
                   <th className="text-left p-3 hidden sm:table-cell">Date</th>
                   <th className="text-left p-3 hidden md:table-cell">Venue</th>
                   <th className="text-center p-3">Status</th>
@@ -98,6 +106,7 @@ export default function AdminWorkshopsPage() {
                 {workshops.map((w) => (
                   <tr key={w.id} className="border-b border-white/5 text-white hover:bg-white/5">
                     <td className="p-3 font-medium">{w.title}</td>
+                    <td className="p-3 text-gray-400 hidden sm:table-cell">{w.category}</td>
                     <td className="p-3 text-gray-400 hidden sm:table-cell">{w.event_date}</td>
                     <td className="p-3 text-gray-400 hidden md:table-cell">{w.venue}</td>
                     <td className="p-3 text-center">

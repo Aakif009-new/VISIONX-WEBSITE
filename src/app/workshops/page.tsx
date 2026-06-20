@@ -18,7 +18,7 @@ function mapApiWorkshop(w: any): Workshop {
     capacity: w.max_seats || 0,
     registeredCount: w.registrations?.length || 0,
     isRegistrationOpen: w.registration_open ?? true,
-    category: "Workshop",
+    category: w.category || "Workshop",
     googleFormUrl: w.google_form_url || undefined,
     price: w.price || undefined,
   };
