@@ -131,6 +131,17 @@ export default function WorkshopDetailPage() {
                     Registration Status
                   </h3>
 
+                  {workshop.price && (
+                    <div className="mb-4 p-3 rounded-lg bg-[#00A3FF]/10 border border-[#00A3FF]/20">
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-gray-400">Price</span>
+                        <span className="text-white font-semibold text-lg">
+                          {/^\d+$/.test(workshop.price) ? `₹${workshop.price}` : workshop.price}
+                        </span>
+                      </div>
+                    </div>
+                  )}
+
                   <div className="mb-4">
                     <div className="flex items-center justify-between text-sm mb-1.5">
                       <span className="text-gray-400">Capacity</span>
