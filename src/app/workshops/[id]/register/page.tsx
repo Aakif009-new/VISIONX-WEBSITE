@@ -1,16 +1,48 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState, useEffect, type FormEvent } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Send, CheckCircle } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import GlassCard from "@/components/GlassCard";
-import { workshops } from "@/data/workshops";
+
+interface WorkshopSummary {
+  id: string; title: string; date: string; time: string; location: string;
+  capacity: number; registeredCount: number; isRegistrationOpen: boolean;
+  googleFormUrl?: string;
+}
+
+function mapApiWorkshop(w: any): WorkshopSummary {
+  return {
+    id: w.id,
+    title: w.title,
+    date: w.event_date || "",
+    time: w.event_time || "",
+    location: w.venue || "",
+    capacity: w.max_seats || 0,
+    registeredCount: w.registrations?.length || 0,
+    isRegistrationOpen: w.registration_open ?? true,
+    googleFormUrl: w.google_form_url || undefined,
+  };
+}
 
 export default function RegisterPage() {
   const params = useParams();
-  const workshop = workshops.find((w) => w.id === params.id);
+  const [workshop, setWorkshop] = useState<WorkshopSummary | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(`/api/workshops/${params.id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && data.data) {
+          setWorkshop(mapApiWorkshop(data.data));
+        }
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, [params.id]);
 
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({
@@ -23,6 +55,16 @@ export default function RegisterPage() {
     notes: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
+
+  if (loading) {
+    return (
+      <section className="relative pt-32 pb-20 px-4 sm:px-6">
+        <div className="max-w-lg mx-auto text-center">
+          <p className="text-gray-500 text-sm">Loading...</p>
+        </div>
+      </section>
+    );
+  }
 
   if (!workshop) {
     return (

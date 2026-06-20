@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
 import WorkshopCard from "@/components/WorkshopCard";
-import { workshops as staticWorkshops, type Workshop } from "@/data/workshops";
+import type { Workshop } from "@/data/workshops";
 
 function mapApiWorkshop(w: any): Workshop {
   return {
@@ -25,14 +25,14 @@ function mapApiWorkshop(w: any): Workshop {
 }
 
 export default function WorkshopsPage() {
-  const [workshops, setWorkshops] = useState<Workshop[]>(staticWorkshops);
+  const [workshops, setWorkshops] = useState<Workshop[]>([]);
   const [filter, setFilter] = useState<string>("All");
 
   useEffect(() => {
     fetch("/api/workshops")
       .then((res) => res.json())
       .then((data) => {
-        if (data.success && Array.isArray(data.data) && data.data.length > 0) {
+        if (data.success && Array.isArray(data.data)) {
           setWorkshops(data.data.map(mapApiWorkshop));
         }
       })

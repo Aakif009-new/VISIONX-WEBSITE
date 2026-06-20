@@ -1,17 +1,69 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Calendar, Clock, MapPin, ArrowLeft, CheckCircle, XCircle } from "lucide-react";
 import { useParams } from "next/navigation";
 import ScrollReveal from "@/components/ScrollReveal";
 import GlassCard from "@/components/GlassCard";
-import { workshops } from "@/data/workshops";
 import { cn } from "@/lib/utils";
+
+interface WorkshopDetail {
+  id: string;
+  title: string; date: string; time: string; location: string;
+  description: string; fullDescription: string;
+  capacity: number; registeredCount: number;
+  isRegistrationOpen: boolean; category: string;
+  googleFormUrl?: string; price?: string;
+}
+
+function mapApiWorkshop(w: any): WorkshopDetail {
+  return {
+    id: w.id,
+    title: w.title,
+    date: w.event_date || "",
+    time: w.event_time || "",
+    location: w.venue || "",
+    description: w.description || "",
+    fullDescription: w.description || "",
+    capacity: w.max_seats || 0,
+    registeredCount: w.registrations?.length || 0,
+    isRegistrationOpen: w.registration_open ?? true,
+    category: w.category || "Workshop",
+    googleFormUrl: w.google_form_url || undefined,
+    price: w.price || undefined,
+  };
+}
 
 export default function WorkshopDetailPage() {
   const params = useParams();
-  const workshop = workshops.find((w) => w.id === params.id);
+  const [workshop, setWorkshop] = useState<WorkshopDetail | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(`/api/workshops/${params.id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && data.data) {
+          setWorkshop(mapApiWorkshop(data.data));
+        } else {
+          setWorkshop(null);
+        }
+      })
+      .catch(() => setWorkshop(null))
+      .finally(() => setLoading(false));
+  }, [params.id]);
+
+  if (loading) {
+    return (
+      <section className="relative pt-32 pb-20 px-4 sm:px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <p className="text-gray-500 text-sm">Loading...</p>
+        </div>
+      </section>
+    );
+  }
 
   if (!workshop) notFound();
 

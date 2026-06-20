@@ -4,12 +4,11 @@ import { useState } from "react";
 import { Plus, Edit3, Trash2, Users, Search, X, CheckCircle, XCircle } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import GlassCard from "@/components/GlassCard";
-import { workshops as initialWorkshops, type Workshop } from "@/data/workshops";
-import { mockRegistrations } from "@/data/workshops";
+import type { Workshop } from "@/data/workshops";
 import { cn } from "@/lib/utils";
 
 export default function AdminDashboardPage() {
-  const [workshopList, setWorkshopList] = useState<Workshop[]>(initialWorkshops);
+  const [workshopList, setWorkshopList] = useState<Workshop[]>([]);
   const [search, setSearch] = useState("");
   const [showCreate, setShowCreate] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -35,7 +34,7 @@ export default function AdminDashboardPage() {
       w.category.toLowerCase().includes(search.toLowerCase())
   );
 
-  const filteredParticipants = mockRegistrations.filter(
+  const filteredParticipants = ([] as any[]).filter(
     (p) =>
       showParticipants === null || p.workshopId === showParticipants
   ).filter(
