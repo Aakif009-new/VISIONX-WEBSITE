@@ -40,6 +40,7 @@ export default function WorkshopDetailPage() {
   const params = useParams();
   const [workshop, setWorkshop] = useState<WorkshopDetail | null>(null);
   const [loading, setLoading] = useState(true);
+  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     fetch(`/api/workshops/${params.id}`)
@@ -117,9 +118,17 @@ export default function WorkshopDetailPage() {
                   <h3 className="text-white font-semibold text-lg mb-3">
                     About This Workshop
                   </h3>
-                  <p className="text-gray-400 text-sm leading-relaxed whitespace-pre-line">
-                    {workshop.fullDescription}
-                  </p>
+                  <div>
+                    <p className={`text-gray-400 text-sm leading-relaxed whitespace-pre-line ${!expanded ? 'line-clamp-3' : ''}`}>
+                      {workshop.fullDescription}
+                    </p>
+                    <button
+                      onClick={() => setExpanded(!expanded)}
+                      className="text-[#00A3FF] text-sm mt-2 hover:underline focus:outline-none"
+                    >
+                      {expanded ? 'Show less' : 'Read more'}
+                    </button>
+                  </div>
                 </GlassCard>
               </ScrollReveal>
             </div>

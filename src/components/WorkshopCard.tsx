@@ -59,7 +59,7 @@ export default function WorkshopCard({ workshop, index }: Props) {
         <h3 className="text-white font-semibold text-lg mb-2 group-hover:text-[#00A3FF] transition-colors duration-300">
           {workshop.title}
         </h3>
-        <p className="text-gray-400 text-sm leading-relaxed mb-4 flex-1">
+        <p className="text-gray-400 text-sm leading-relaxed mb-4 flex-1 whitespace-pre-line line-clamp-3">
           {workshop.description}
         </p>
 
