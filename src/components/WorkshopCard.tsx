@@ -19,15 +19,21 @@ export default function WorkshopCard({ workshop, index }: Props) {
   return (
     <ScrollReveal delay={index * 0.1}>
       <GlassCard hover className="group h-full flex flex-col">
-        <div className="w-full h-40 rounded-xl bg-gradient-to-br from-[#00A3FF]/10 to-[#3BB8FF]/5 border border-[#00A3FF]/10 mb-4 flex items-center justify-center overflow-hidden">
-          <div className="text-center p-4">
-            <span className="px-3 py-1 rounded-full text-[10px] font-medium bg-[#00A3FF]/15 text-[#00A3FF] uppercase tracking-wider">
-              {workshop.category}
-            </span>
-            <div className="font-orbitron text-[#00A3FF]/40 text-sm tracking-widest mt-3">
-              {workshop.title.slice(0, 25)}
+        <div className="w-full h-40 rounded-xl overflow-hidden mb-4">
+          {workshop.banner ? (
+            <img src={workshop.banner} alt={workshop.title} className="w-full h-full object-cover" />
+          ) : (
+            <div className="w-full h-full bg-gradient-to-br from-[#00A3FF]/10 to-[#3BB8FF]/5 border border-[#00A3FF]/10 flex items-center justify-center">
+              <div className="text-center p-4">
+                <span className="px-3 py-1 rounded-full text-[10px] font-medium bg-[#00A3FF]/15 text-[#00A3FF] uppercase tracking-wider">
+                  {workshop.category}
+                </span>
+                <div className="font-orbitron text-[#00A3FF]/40 text-sm tracking-widest mt-3">
+                  {workshop.title.slice(0, 25)}
+                </div>
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         <div className="flex items-center justify-between mb-3">

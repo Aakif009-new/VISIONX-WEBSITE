@@ -16,6 +16,7 @@ interface WorkshopDetail {
   capacity: number; registeredCount: number;
   isRegistrationOpen: boolean; category: string;
   googleFormUrl?: string; price?: string;
+  banner?: string;
 }
 
 function mapApiWorkshop(w: any): WorkshopDetail {
@@ -33,6 +34,7 @@ function mapApiWorkshop(w: any): WorkshopDetail {
     category: w.category || "Workshop",
     googleFormUrl: w.google_form_url || undefined,
     price: w.price || undefined,
+    banner: w.banner_image || undefined,
   };
 }
 
@@ -84,6 +86,14 @@ export default function WorkshopDetailPage() {
               Back to Workshops
             </Link>
           </ScrollReveal>
+
+          {workshop.banner && (
+            <ScrollReveal>
+              <div className="w-full h-48 sm:h-64 rounded-xl overflow-hidden mb-8">
+                <img src={workshop.banner} alt={workshop.title} className="w-full h-full object-cover" />
+              </div>
+            </ScrollReveal>
+          )}
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
