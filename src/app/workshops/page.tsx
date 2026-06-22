@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
 import WorkshopCard from "@/components/WorkshopCard";
 import type { Workshop } from "@/data/workshops";
+import { apiUrl } from "@/lib/fetch-api";
 
 function mapApiWorkshop(w: any): Workshop {
   return {
@@ -29,7 +30,7 @@ export default function WorkshopsPage() {
   const [filter, setFilter] = useState<string>("All");
 
   useEffect(() => {
-    fetch("/api/workshops")
+    fetch(apiUrl("/api/workshops"))
       .then((res) => res.json())
       .then((data) => {
         if (data.success && Array.isArray(data.data)) {

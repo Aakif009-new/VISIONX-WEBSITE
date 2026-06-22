@@ -4,6 +4,7 @@ import { useState, type FormEvent } from "react";
 import { Send, CheckCircle, Mail } from "lucide-react";
 import type { ReactNode } from "react";
 import GlassCard from "./GlassCard";
+import { apiUrl } from "@/lib/fetch-api";
 import ScrollReveal from "./ScrollReveal";
 
 const contactMethods: {
@@ -55,7 +56,7 @@ export default function ContactForm() {
     setSubmitting(true);
 
     try {
-      await fetch("/api/contact", {
+      await fetch(apiUrl("/api/contact"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

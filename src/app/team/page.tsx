@@ -9,6 +9,7 @@ import {
   teamLeads as staticTeamLeads,
   type TeamMember,
 } from "@/data/team";
+import { apiUrl } from "@/lib/fetch-api";
 
 function mapApiTeamMember(m: any, index: number): TeamMember {
   return {
@@ -26,7 +27,7 @@ export default function TeamPage() {
   const [teamLeads, setTeamLeads] = useState<TeamMember[]>(staticTeamLeads);
 
   useEffect(() => {
-    fetch("/api/team")
+    fetch(apiUrl("/api/team"))
       .then((res) => res.json())
       .then((data) => {
         if (data.success && Array.isArray(data.data) && data.data.length > 0) {

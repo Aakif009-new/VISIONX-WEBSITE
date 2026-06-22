@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ArrowLeft, Send, CheckCircle } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import GlassCard from "@/components/GlassCard";
+import { apiUrl } from "@/lib/fetch-api";
 
 interface WorkshopSummary {
   id: string; title: string; date: string; time: string; location: string;
@@ -33,7 +34,7 @@ export default function RegisterPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`/api/workshops/${params.id}`)
+    fetch(apiUrl(`/api/workshops/${params.id}`))
       .then((res) => res.json())
       .then((data) => {
         if (data.success && data.data) {
@@ -135,7 +136,7 @@ export default function RegisterPage() {
 
     let apiSuccess = false;
     try {
-      const res = await fetch("/api/workshop/register", {
+      const res = await fetch(apiUrl("/api/workshop/register"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

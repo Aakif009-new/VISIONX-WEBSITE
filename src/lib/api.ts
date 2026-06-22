@@ -1,4 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { apiUrl } from "./fetch-api";
 
 const TOKEN_KEY = "visionx_admin_token";
 
@@ -26,7 +27,7 @@ export async function apiRequest<T = unknown>(
   };
   if (token) headers["Authorization"] = `Bearer ${token}`;
 
-  const res = await fetch(path, { ...options, headers });
+  const res = await fetch(apiUrl(path), { ...options, headers });
   const json = await res.json();
 
   if (!res.ok) {
@@ -285,7 +286,7 @@ export function useUpload() {
       const token = getToken();
       const formData = new FormData();
       formData.append("file", file);
-      const res = await fetch("/api/admin/upload", {
+      const res = await fetch(apiUrl("/api/admin/upload"), {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
         body: formData,

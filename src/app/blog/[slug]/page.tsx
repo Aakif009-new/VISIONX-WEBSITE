@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, Calendar, User } from "lucide-react";
 import GlassCard from "@/components/GlassCard";
+import { apiUrl } from "@/lib/fetch-api";
 
 interface BlogPost {
   id: string; title: string; slug: string; excerpt: string | null; content: string;
@@ -11,7 +12,7 @@ interface BlogPost {
 
 async function getPost(slug: string): Promise<BlogPost | null> {
   try {
-    const res = await fetch(`http://localhost:4000/api/admin/blogs?status=published`, {
+    const res = await fetch(`${apiUrl("/api/admin/blogs")}?status=published`, {
       cache: "no-store",
     });
     const json = await res.json();

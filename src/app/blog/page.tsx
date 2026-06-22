@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
 import BlogCard from "@/components/BlogCard";
 import { blogPosts as staticBlogPosts, blogCategories as staticCategories, type BlogPost } from "@/data/blogPosts";
+import { apiUrl } from "@/lib/fetch-api";
 
 function mapApiBlogPost(p: any): BlogPost {
   const text = p.excerpt || p.content || "";
@@ -36,7 +37,7 @@ export default function BlogPage() {
   const [activeCategory, setActiveCategory] = useState("All");
 
   useEffect(() => {
-    fetch("/api/blogs")
+    fetch(apiUrl("/api/blogs"))
       .then((res) => res.json())
       .then((data) => {
         if (data.success && Array.isArray(data.data) && data.data.length > 0) {

@@ -8,6 +8,7 @@ import { useParams } from "next/navigation";
 import ScrollReveal from "@/components/ScrollReveal";
 import GlassCard from "@/components/GlassCard";
 import { cn } from "@/lib/utils";
+import { apiUrl } from "@/lib/fetch-api";
 
 interface WorkshopDetail {
   id: string;
@@ -45,7 +46,7 @@ export default function WorkshopDetailPage() {
   const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
-    fetch(`/api/workshops/${params.id}`)
+    fetch(apiUrl(`/api/workshops/${params.id}`))
       .then((res) => res.json())
       .then((data) => {
         if (data.success && data.data) {
