@@ -12,12 +12,11 @@ interface BlogPost {
 
 async function getPost(slug: string): Promise<BlogPost | null> {
   try {
-    const res = await fetch(`${apiUrl("/api/admin/blogs")}?status=published`, {
+    const res = await fetch(apiUrl(`/api/blogs/${slug}`), {
       cache: "no-store",
     });
     const json = await res.json();
-    const posts = (json.data || []) as BlogPost[];
-    return posts.find((p) => p.slug === slug && p.status === "published") || null;
+    return json.data || null;
   } catch {
     return null;
   }

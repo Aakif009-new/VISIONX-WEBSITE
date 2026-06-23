@@ -2,6 +2,7 @@
 
 import ScrollReveal from "@/components/ScrollReveal";
 import ApplicationForm from "@/components/ApplicationForm";
+import { apiUrl } from "@/lib/fetch-api";
 
 const fields = [
   { name: "fullName", label: "Full Name", type: "text" as const, placeholder: "Enter your full name", required: true },
@@ -53,7 +54,7 @@ export default function IncubatePage() {
             fields={fields}
             submitLabel="Apply For Incubation"
             emailSubject="Startup Incubation Application"
-            apiEndpoint="/api/incubation/apply"
+            apiEndpoint={apiUrl("/api/incubation/apply")}
             getPayload={(data) => ({
               full_name: data.fullName,
               college_name: data.college,

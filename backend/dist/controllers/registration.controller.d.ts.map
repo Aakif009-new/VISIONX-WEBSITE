@@ -1,1 +1,0 @@
-{"version":3,"file":"registration.controller.d.ts","sourceRoot":"","sources":["../../src/controllers/registration.controller.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,OAAO,EAAE,QAAQ,EAAE,YAAY,EAAE,MAAM,SAAS,CAAC;AAI/D,qBAAa,sBAAsB;IAC3B,QAAQ,CAAC,GAAG,EAAE,OAAO,EAAE,GAAG,EAAE,QAAQ,EAAE,IAAI,EAAE,YAAY;CA8B/D;AAED,eAAO,MAAM,sBAAsB,wBAA+B,CAAC"}
