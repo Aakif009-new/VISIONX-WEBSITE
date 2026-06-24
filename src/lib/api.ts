@@ -89,6 +89,7 @@ export function useCreateTeamMember() {
         body: JSON.stringify(data),
       }),
     onSuccess: () => qc.invalidateQueries({ queryKey: ["team"] }),
+    onError: (err: Error) => alert(err.message),
   });
 }
 
@@ -101,6 +102,7 @@ export function useUpdateTeamMember() {
         body: JSON.stringify(data),
       }),
     onSuccess: () => qc.invalidateQueries({ queryKey: ["team"] }),
+    onError: (err: Error) => alert(err.message),
   });
 }
 
@@ -110,6 +112,7 @@ export function useDeleteTeamMember() {
     mutationFn: (id: string) =>
       apiRequest(`/api/admin/team/${id}`, { method: "DELETE" }),
     onSuccess: () => qc.invalidateQueries({ queryKey: ["team"] }),
+    onError: (err: Error) => alert(err.message),
   });
 }
 
@@ -131,6 +134,7 @@ export function useCreateWorkshop() {
         body: JSON.stringify(data),
       }),
     onSuccess: () => qc.invalidateQueries({ queryKey: ["admin-workshops"] }),
+    onError: (err: Error) => alert(err.message),
   });
 }
 
@@ -143,6 +147,7 @@ export function useUpdateWorkshop() {
         body: JSON.stringify(data),
       }),
     onSuccess: () => qc.invalidateQueries({ queryKey: ["admin-workshops"] }),
+    onError: (err: Error) => alert(err.message),
   });
 }
 
@@ -152,6 +157,7 @@ export function useDeleteWorkshop() {
     mutationFn: (id: string) =>
       apiRequest(`/api/admin/workshops/${id}`, { method: "DELETE" }),
     onSuccess: () => qc.invalidateQueries({ queryKey: ["admin-workshops"] }),
+    onError: (err: Error) => alert(err.message),
   });
 }
 
@@ -176,6 +182,7 @@ export function useCreateBlog() {
         body: JSON.stringify(data),
       }),
     onSuccess: () => qc.invalidateQueries({ queryKey: ["admin-blogs"] }),
+    onError: (err: Error) => alert(err.message),
   });
 }
 
@@ -188,6 +195,7 @@ export function useUpdateBlog() {
         body: JSON.stringify(data),
       }),
     onSuccess: () => qc.invalidateQueries({ queryKey: ["admin-blogs"] }),
+    onError: (err: Error) => alert(err.message),
   });
 }
 
@@ -197,6 +205,7 @@ export function useDeleteBlog() {
     mutationFn: (id: string) =>
       apiRequest(`/api/admin/blogs/${id}`, { method: "DELETE" }),
     onSuccess: () => qc.invalidateQueries({ queryKey: ["admin-blogs"] }),
+    onError: (err: Error) => alert(err.message),
   });
 }
 
@@ -218,6 +227,7 @@ export function useUpdateIncubationStatus() {
         body: JSON.stringify({ status }),
       }),
     onSuccess: () => qc.invalidateQueries({ queryKey: ["incubations"] }),
+    onError: (err: Error) => alert(err.message),
   });
 }
 
@@ -238,6 +248,7 @@ export function useUpdateMemberStatus() {
         body: JSON.stringify({ status }),
       }),
     onSuccess: () => qc.invalidateQueries({ queryKey: ["member-applications"] }),
+    onError: (err: Error) => alert(err.message),
   });
 }
 
@@ -256,6 +267,7 @@ export function useDeleteContactMessage() {
     mutationFn: (id: string) =>
       apiRequest(`/api/admin/contact-messages/${id}`, { method: "DELETE" }),
     onSuccess: () => qc.invalidateQueries({ queryKey: ["contact-messages"] }),
+    onError: (err: Error) => alert(err.message),
   });
 }
 
@@ -276,6 +288,7 @@ export function useUpdateSettings() {
         body: JSON.stringify({ key, value }),
       }),
     onSuccess: () => qc.invalidateQueries({ queryKey: ["settings"] }),
+    onError: (err: Error) => alert(err.message),
   });
 }
 

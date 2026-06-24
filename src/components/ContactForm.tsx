@@ -56,11 +56,14 @@ export default function ContactForm() {
     setSubmitting(true);
 
     try {
-      await fetch(apiUrl("/api/contact"), {
+      const res = await fetch(apiUrl("/api/contact"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
+      if (!res.ok) {
+        throw new Error("API returned " + res.status);
+      }
     } catch {
       const body = `Name: ${formData.name}\nEmail: ${formData.email}\nMessage: ${formData.message}`;
       const mailtoLink = `mailto:visionx.official.org@gmail.com?subject=${encodeURIComponent(
