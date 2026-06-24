@@ -44,6 +44,7 @@ export const teamLeads: TeamMember[] = [
     name: "VK Mohammed Hussain",
     role: "Media Team Lead",
     description: "Managing branding, content creation, and digital presence.",
+    image: "/images/team/Media_team_lead.jpeg",
   },
   {
     name: "Mohammed Saad V",
