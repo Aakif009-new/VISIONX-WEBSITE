@@ -9,9 +9,11 @@ export default function AdminLoginPage() {
   const login = useLogin();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError("");
     try {
       const res = await login.mutateAsync({ email, password });
       if (res.data) {
@@ -19,7 +21,9 @@ export default function AdminLoginPage() {
         setToken(token);
         router.push("/admin/dashboard");
       }
-    } catch {}
+    } catch (err: any) {
+      setError(err.message || "Login failed");
+    }
   };
 
   return (
@@ -32,6 +36,11 @@ export default function AdminLoginPage() {
           </div>
           <p className="text-gray-400 text-sm">Sign in to manage your website</p>
         </div>
+        {error && (
+          <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-3 mb-4 text-red-400 text-sm text-center">
+            {error}
+          </div>
+        )}
         <form
           onSubmit={handleSubmit}
           className="bg-[#0A0E27]/80 border border-[#00A3FF]/10 rounded-2xl p-6 space-y-4"
