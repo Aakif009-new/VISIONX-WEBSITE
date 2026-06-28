@@ -32,13 +32,17 @@ export default function AdminBlogPage() {
     setEditing(p); setShowForm(true);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const isSaving = create.isPending || update.isPending;
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const payload: any = { ...form };
     Object.keys(payload).forEach((k) => { if (!payload[k]) payload[k] = null; });
-    if (editing) await update.mutateAsync({ id: editing.id, data: payload });
-    else await create.mutateAsync(payload);
-    resetForm();
+    if (editing) {
+      update.mutate({ id: editing.id, data: payload }, { onSuccess: () => resetForm() });
+    } else {
+      create.mutate(payload, { onSuccess: () => resetForm() });
+    }
   };
 
   return (
@@ -81,7 +85,9 @@ export default function AdminBlogPage() {
             required
           />
           <div className="flex gap-2">
-            <button type="submit" className="px-4 py-2 rounded-lg bg-[#00A3FF] text-white text-sm">{editing ? "Update" : "Create"}</button>
+            <button type="submit" disabled={isSaving} className="px-4 py-2 rounded-lg bg-[#00A3FF] text-white text-sm disabled:opacity-50">
+              {isSaving ? "Saving..." : editing ? "Update" : "Create"}
+            </button>
             <button type="button" onClick={resetForm} className="px-4 py-2 rounded-lg bg-white/10 text-gray-300 text-sm">Cancel</button>
           </div>
         </form>

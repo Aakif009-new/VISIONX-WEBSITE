@@ -46,21 +46,28 @@ export default function AdminTeamPage() {
     setShowForm(true);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const isSaving = createMember.isPending || updateMember.isPending;
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (editing) {
-      await updateMember.mutateAsync({ id: editing.id, data: form as any });
+      updateMember.mutate(
+        { id: editing.id, data: form as any },
+        { onSuccess: () => resetForm() }
+      );
     } else {
-      await createMember.mutateAsync(form as any);
+      createMember.mutate(form as any, { onSuccess: () => resetForm() });
     }
-    resetForm();
   };
 
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    const res = await upload.mutateAsync(file);
-    if (res.data?.url) setForm((f) => ({ ...f, image_url: res.data.url }));
+    upload.mutate(file, {
+      onSuccess: (res: any) => {
+        if (res.data?.url) setForm((f) => ({ ...f, image_url: res.data.url }));
+      },
+    });
   };
 
   return (
@@ -96,8 +103,10 @@ export default function AdminTeamPage() {
             <input type="file" accept="image/*" onChange={handleFileUpload} className="text-sm text-gray-400" />
             {form.image_url && <span className="text-xs text-gray-500 truncate">{form.image_url}</span>}
           </div>
-          <div className="flex gap-2">
-            <button type="submit" className="px-4 py-2 rounded-lg bg-[#00A3FF] text-white text-sm font-medium">{editing ? "Update" : "Create"}</button>
+            <div className="flex gap-2">
+            <button type="submit" disabled={isSaving} className="px-4 py-2 rounded-lg bg-[#00A3FF] text-white text-sm font-medium disabled:opacity-50">
+              {isSaving ? "Saving..." : editing ? "Update" : "Create"}
+            </button>
             <button type="button" onClick={resetForm} className="px-4 py-2 rounded-lg bg-white/10 text-gray-300 text-sm">Cancel</button>
           </div>
         </form>

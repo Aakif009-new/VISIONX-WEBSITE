@@ -25,10 +25,12 @@ export default function AdminSettingsPage() {
     if (data?.data) setValues(data.data as Record<string, string>);
   }, [data]);
 
-  const handleSave = async (key: string) => {
+  const handleSave = (key: string) => {
     setSaving(key);
-    await update.mutateAsync({ key, value: values[key] || "" });
-    setSaving(null);
+    update.mutate(
+      { key, value: values[key] || "" },
+      { onSuccess: () => setSaving(null), onError: () => setSaving(null) }
+    );
   };
 
   return (

@@ -35,7 +35,9 @@ export default function AdminWorkshopsPage() {
     setEditing(w); setShowForm(true);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const isSaving = create.isPending || update.isPending;
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const payload: any = { ...form };
     if (payload.max_seats) payload.max_seats = parseInt(payload.max_seats);
@@ -44,13 +46,15 @@ export default function AdminWorkshopsPage() {
     if (!payload.google_form_url) payload.google_form_url = null;
     if (!payload.price) payload.price = null;
     if (!payload.category) payload.category = "Workshop";
-    if (editing) await update.mutateAsync({ id: editing.id, data: payload });
-    else await create.mutateAsync(payload);
-    resetForm();
+    if (editing) {
+      update.mutate({ id: editing.id, data: payload }, { onSuccess: () => resetForm() });
+    } else {
+      create.mutate(payload, { onSuccess: () => resetForm() });
+    }
   };
 
-  const toggleRegistration = async (w: Workshop) => {
-    await update.mutateAsync({ id: w.id, data: { registration_open: !w.registration_open } });
+  const toggleRegistration = (w: Workshop) => {
+    update.mutate({ id: w.id, data: { registration_open: !w.registration_open } });
   };
 
   return (
@@ -82,7 +86,9 @@ export default function AdminWorkshopsPage() {
           </div>
           <textarea placeholder="Description" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} className="w-full px-3 py-2 rounded-lg bg-[#050816] border border-[#00A3FF]/20 text-white text-sm" rows={3} required />
           <div className="flex gap-2">
-            <button type="submit" className="px-4 py-2 rounded-lg bg-[#00A3FF] text-white text-sm">{editing ? "Update" : "Create"}</button>
+            <button type="submit" disabled={isSaving} className="px-4 py-2 rounded-lg bg-[#00A3FF] text-white text-sm disabled:opacity-50">
+              {isSaving ? "Saving..." : editing ? "Update" : "Create"}
+            </button>
             <button type="button" onClick={resetForm} className="px-4 py-2 rounded-lg bg-white/10 text-gray-300 text-sm">Cancel</button>
           </div>
         </form>
