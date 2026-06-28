@@ -33,17 +33,17 @@ model blog_posts {
 }
 
 model team_members {
-  id            String   @id @default(uuid())
-  name          String
-  role          String
-  department    String?
-  bio           String?
-  image_url     String?
-  linkedin_url  String?
-  display_order Int      @default(0)
-  council       Boolean  @default(false)
-  created_at    DateTime @default(now())
-  updated_at    DateTime @updatedAt
+  id              String   @id @default(uuid())
+  name            String
+  role            String
+  description     String?
+  image           String?
+  council         Boolean  @default(false)
+  object_position String?
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+
+  @@unique([name, role])
 }
 
 model site_settings {

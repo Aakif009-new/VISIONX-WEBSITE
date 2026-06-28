@@ -4,7 +4,7 @@ import type { CreateTeamMemberInput, UpdateTeamMemberInput } from "@/lib/validat
 export class AdminTeamService {
   async getAll() {
     return prisma.team_members.findMany({
-      orderBy: [{ council: "desc" }, { display_order: "asc" }, { name: "asc" }],
+      orderBy: [{ council: "desc" }, { name: "asc" }],
     });
   }
 

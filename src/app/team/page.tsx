@@ -15,9 +15,10 @@ function mapApiTeamMember(m: any, index: number): TeamMember {
   return {
     name: m.name,
     role: m.role,
-    description: m.bio || "",
-    image: m.image_url || undefined,
+    description: m.description || "",
+    image: m.image || undefined,
     council: m.council || false,
+    objectPosition: m.object_position || undefined,
   };
 }
 

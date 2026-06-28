@@ -8,12 +8,10 @@ export const loginSchema = z.object({
 export const createTeamMemberSchema = z.object({
   name: z.string().min(1, "Name is required"),
   role: z.string().min(1, "Role is required"),
-  department: z.string().optional().nullable(),
-  bio: z.string().optional().nullable(),
-  image_url: z.string().optional().nullable(),
-  linkedin_url: z.string().optional().nullable(),
-  display_order: z.number().int().optional().default(0),
+  description: z.string().optional().nullable(),
+  image: z.string().optional().nullable(),
   council: z.boolean().optional().default(false),
+  object_position: z.string().optional().nullable(),
 });
 
 export const updateTeamMemberSchema = createTeamMemberSchema.partial();
