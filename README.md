@@ -1,4 +1,4 @@
-# <p align="center"><img src="./public/favicon.ico" width="40" height="40" alt="VisionX Logo" /> <br/>VisionX</p>
+# <p align="center"><img width="1254" height="1254" alt="logo" src="https://github.com/user-attachments/assets/b815cebc-2dcf-4906-bb83-0e7928f5d8da" />
 
 <p align="center">
   <strong>See Beyond. Build the Future.</strong>
@@ -273,32 +273,7 @@ Open [http://localhost:3000](http://localhost:3000) inside your web browser.
 
 ---
 
-## 🔐 Environment Variables
 
-Create a `.env` file in the project's root folder matching the following model. Make sure not to commit this file to version control.
-
-```env
-# Relational Database connection URL (PostgreSQL Connection String)
-# Format: postgresql://USER:PASSWORD@HOST:PORT/DATABASE
-DATABASE_URL="postgresql://postgres:password@localhost:5432/visionx"
-
-# Authentication Token Key (Generate a secure random string)
-JWT_SECRET="YOUR_RANDOM_LONG_SECRET_KEY_HERE"
-
-# Google Service Account Credentials (For sheets dual-write functionality)
-GOOGLE_SERVICE_ACCOUNT_EMAIL="your-service-account-email@your-project-id.iam.gserviceaccount.com"
-
-# Private key must preserve newline markings. Wrap inside double quotes if using multi-line configs.
-GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBg...YOUR_KEY...\n-----END PRIVATE KEY-----\n"
-
-# JSON mapping of sheet resource identifiers to automate data routing
-GOOGLE_SHEET_IDS='{
-  "workshop_registrations": "YOUR_WORKSHOP_SHEET_ID_HERE",
-  "incubation_applications": "YOUR_INCUBATION_SHEET_ID_HERE",
-  "contact_messages": "YOUR_CONTACT_SHEET_ID_HERE",
-  "member_applications": "YOUR_MEMBERSHIP_SHEET_ID_HERE"
-}'
-```
 
 ---
 
