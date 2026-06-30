@@ -1,10 +1,10 @@
 {
   "build": {
     "builder": "NIXPACKS",
-    "buildCommand": "npm install && npx prisma generate && npx prisma db push && npx prisma db seed && npm run build"
+    "buildCommand": "npm run db:generate && npm run build"
   },
   "deploy": {
-    "startCommand": "npm start",
+    "startCommand": "npm run db:push && npm run db:seed && npm start",
     "healthcheckPath": "/api/health",
     "restartPolicyType": "always"
   }

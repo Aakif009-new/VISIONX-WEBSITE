@@ -33,12 +33,26 @@ export default function TeamPage() {
       .then((data) => {
         if (data.success && Array.isArray(data.data) && data.data.length > 0) {
           const all: TeamMember[] = data.data.map(mapApiTeamMember);
-          const ceoMember = all.find(
-            (m: TeamMember) => m.role?.toLowerCase().includes("ceo")
-          );
+          const isCeo = (m: TeamMember) => {
+            const role = m.role?.toLowerCase() || "";
+            return role.includes("ceo") || role.includes("chief executive officer");
+          };
+          const ceoMember = all.find(isCeo);
           const councilMembers = all.filter(
             (m: TeamMember) => m.council && m.name !== ceoMember?.name
           );
+          
+          // Sort council members: "Founder" (without "Co-") should come before others
+          councilMembers.sort((a, b) => {
+            const roleA = a.role?.toLowerCase() || "";
+            const roleB = b.role?.toLowerCase() || "";
+            const isAFounder = roleA.includes("founder") && !roleA.includes("co-");
+            const isBFounder = roleB.includes("founder") && !roleB.includes("co-");
+            if (isAFounder && !isBFounder) return -1;
+            if (!isAFounder && isBFounder) return 1;
+            return 0;
+          });
+
           const foundingPair = councilMembers.slice(0, 2);
           if (foundingPair.length > 0) setFoundingCouncil(foundingPair);
           if (ceoMember) setCeo(ceoMember);
