@@ -1,4 +1,4 @@
-# <p align="center"><img width="1254" height="1254" alt="logo" src="https://github.com/user-attachments/assets/b815cebc-2dcf-4906-bb83-0e7928f5d8da" />
+
 
 <p align="center">
   <strong>See Beyond. Build the Future.</strong>
